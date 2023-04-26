@@ -1,0 +1,15 @@
+[Unit]
+Description=Reboots unit after 30s
+
+[Service]
+StandardOutput=syslog+console
+ExecStart=/bin/sh -c "\
+test -f /cycle-count || echo 0 > /cycle-count;\
+echo 'starting cycletest';\
+sleep 30;\
+expr `cat /cycle-count` + 1 > /cycle-count;\
+systemctl reboot;\
+"
+
+[Install]
+WantedBy=multi-user.target
