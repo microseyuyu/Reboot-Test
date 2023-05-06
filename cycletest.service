@@ -6,7 +6,7 @@ StandardOutput=syslog+console
 ExecStart=/bin/sh -c "\
 test -f /cycle-count || echo 0 > /cycle-count;\
 echo 'starting cycletest';\
-sleep 30;\
+sleep 15;\
 expr `cat /cycle-count` + 1 > /cycle-count;\
 systemctl reboot;\
 "
